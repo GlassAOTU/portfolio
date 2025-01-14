@@ -10,64 +10,87 @@ const scene = new THREE.Scene();
 // ---------------------------------- VERTEX SHADER
 const vertexShader = `
 varying vec3 vPosition;
+varying vec3 vNormal;
+varying vec3 vViewPosition;
 uniform float uTime;
 
 void main() {
-    vPosition = position; // Pass the vertex position to the fragment shader
-
+    vPosition = position;
+    vNormal = normalize(normalMatrix * normal);
+    
+    vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+    vViewPosition = -mvPosition.xyz;
+    
+    // Wave animations
     vec3 newPosition = position;
-
-    // Long horizontal sine wave along the x-axis affecting height (y-axis)
+    
+    // Keep main x-axis wave
     newPosition.y += sin(newPosition.x * 0.1 - uTime * 0.25) * 2.0;
-
-    // Additional sine wave along x-axis for randomness
-    // newPosition.y += sin(newPosition.x * 15.0 + uTime * 0.8) * 0.5; // Adjust frequency, speed, and amplitude
-
-    // Smaller random sine waves along the z-axis affecting height (y-axis)
-    newPosition.y += sin(newPosition.z * 1.0 + uTime * 0.5) * 0.9; // First wave
-    newPosition.y += sin(newPosition.z * 1.0 - uTime * 0.1) * 0.4; // Second wave
-    newPosition.y += sin(newPosition.z * 1.0 + uTime * 0.7) * 0.2; // Third wave
-
+    
+    // Diagonal wind effect waves
+    float windSpeed = uTime * 0.4;
+    float diagonalWave = newPosition.x * 0.2 + newPosition.z * 0.7;
+    
+    // Primary diagonal waves
+    newPosition.y += sin(diagonalWave + windSpeed) * 0.3;
+    newPosition.y += cos(diagonalWave * 0.8 - windSpeed * 1.2) * 0.7;
+    
+    // Secondary diagonal waves with different frequencies
+    newPosition.y += sin(diagonalWave * 1.5 + windSpeed * 0.7) * 0.5;
+    newPosition.y += cos(diagonalWave * 2.3 - windSpeed * 0.9) * 0.3;
+    
+    // Add some x displacement for more natural movement
+    newPosition.x += sin(diagonalWave * 0.4 + windSpeed) * 0.1;
+    
+    // Random-looking smaller waves
+    float noise1 = sin(newPosition.z * 2.5 + newPosition.x * 0.4 + windSpeed * 1.2) * 0.05;
+    float noise2 = cos(newPosition.z * 3.7 - newPosition.x * 0.3 + windSpeed * 0.8) * 0.05;
+    float noise3 = sin(newPosition.z * 5.0 + newPosition.x * 0.6 + windSpeed * 1.5) * 0.05;
+    newPosition.y += noise1 + noise2 + noise3;
+    
     gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
 }
-
 `;
+// ---------------------------------- FRAGMENT SHADER
 const fragmentShader = `
 varying vec3 vPosition;
+varying vec3 vNormal;
+varying vec3 vViewPosition;
 uniform float uTime;
 
 void main() {
-    // Combine multiple vertical sine waves for "random-looking" effects
-    float waveY1 = sin(vPosition.y * 10.0 + uTime * 0.5) * 0.05; // First vertical wave
-    float waveY2 = sin(vPosition.y * 20.0 - uTime * 0.3) * 0.03; // Second vertical wave
-    float waveY3 = sin(vPosition.y * 5.0 + uTime * 0.7) * 0.02;  // Third vertical wave
-
-    // Combine the vertical waves
-    float combinedVerticalWave = waveY1 + waveY2 + waveY3;
-
-    // Set the base color to white
-    vec3 baseColor = vec3(1.0, 1.0, 1.0); // Pure white color
-
-    // Add silky transparency based on wave height
-    float alpha = 0.01 + sin(vPosition.y * 5.0 + uTime * 0.3) * 0.4; // More transparency
-
-    // Clamp alpha to ensure it stays within [0.0, 1.0]
-    alpha = clamp(alpha, 0.03, 0.5); // Adjust these values for stronger or weaker transparency
-
-    // Output the final color with transparency
-    gl_FragColor = vec4(baseColor, alpha);
+    // Fresnel calculation
+    vec3 normal = normalize(vNormal);
+    vec3 viewDir = normalize(vViewPosition);
+    float fresnel = 1.0 - max(dot(normal, viewDir), 0.0);
+    
+    // Much sharper fresnel falloff
+    fresnel = pow(fresnel, 4.0);
+    
+    // Additional tightening of the rim
+    fresnel = smoothstep(0.2, 0.8, fresnel);
+    
+    vec3 baseColor = vec3(1.0);
+    vec3 rimColor = vec3(0.7, 0.8, 1.0);
+    vec3 finalColor = mix(baseColor, rimColor, fresnel);
+    
+    // Much lower base opacity and sharper transition
+    float opacity = mix(0.01, 0.7, pow(fresnel, 2.0));
+    
+    gl_FragColor = vec4(finalColor, opacity);
 }
 `;
 const material = new THREE.ShaderMaterial({
     vertexShader: vertexShader,
     fragmentShader: fragmentShader,
     uniforms: {
-        uTime: { value: 0.0 },
+        uTime: { value: 0.0 }
     },
-    transparent: true, // Enable transparency
-    side: THREE.DoubleSide, // Render both sides
+    transparent: true,
+    side: THREE.DoubleSide,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending
 });
-
 
 // create a plane
 const geometry = new THREE.PlaneGeometry(200, 10, 500, 100);
