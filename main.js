@@ -66,12 +66,6 @@ const light = new THREE.PointLight(0xffffff, 100, 100);
 light.position.set(0, 10, 10);
 scene.add(light);
 
-// camera
-const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 0.1, 100);
-camera.position.z = 30;
-camera.position.y = 1;
-scene.add(camera);
-
 // axis helper
 const axisHelper = new THREE.AxesHelper(5);
 scene.add(axisHelper);
@@ -81,6 +75,12 @@ const sizes = {
     width: window.innerWidth,
     height: window.innerHeight
 };
+
+// camera
+const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 0.1, 100);
+camera.position.z = 30;
+camera.position.y = 1;
+scene.add(camera);
 
 // renderer
 const canvas = document.querySelector('.webgl');
