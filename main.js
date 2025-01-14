@@ -9,76 +9,38 @@ const scene = new THREE.Scene();
 // -------------------------------------------------------------------sin wave format === sin(position * wavelength + time * speed) * amplitude
 // ---------------------------------- VERTEX SHADER
 const vertexShader = `
+uniform float uTime;
+
 varying vec3 vPosition;
 varying vec3 vNormal;
-varying vec3 vViewPosition;
-uniform float uTime;
+varying vec2 vUv;
 
 void main() {
     vPosition = position;
-    vNormal = normalize(normalMatrix * normal);
+    vNormal = normal;
     
-    vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-    vViewPosition = -mvPosition.xyz;
-    
-    // Wave animations
-    vec3 newPosition = position;
-    
-    // Keep main x-axis wave
-    newPosition.y += sin(newPosition.x * 0.1 - uTime * 0.25) * 2.0;
-    
-    // Diagonal wind effect waves
-    float windSpeed = uTime * 0.4;
-    float diagonalWave = newPosition.x * 0.2 + newPosition.z * 0.7;
-    float diagonalWave2 = newPosition.x * 0.2 - newPosition.z * 0.7;
-    
-    // Primary diagonal waves
-    // newPosition.y += sin(diagonalWave + windSpeed) * 0.3;
-    
-    // Secondary diagonal waves with different frequencies
-    newPosition.y += sin(diagonalWave * 1.5 + windSpeed * 0.7) * 0.5;
-    newPosition.y += cos(diagonalWave * 2.3 - windSpeed * 0.9) * 0.3;
+    // big wave along x-axis --> sin(position * wavelength + time * speed) * amplitude
+    vPosition.z += sin(vPosition.x * 0.1 - uTime * 0.1) * 2.0;
+    vPosition.z += sin(vPosition.x * -0.15 - uTime * 0.05) * 1.0;
 
-    newPosition.y += cos(diagonalWave2 * 0.5 - windSpeed * 0.9) * 0.3;
-    
-    // Random-looking smaller waves
-    // float noise1 = sin(newPosition.z * 2.5 + newPosition.x * 0.4 + windSpeed * 1.2) * 0.05;
-    // newPosition.y += noise1;
-    
-    // Add some x displacement for more natural movement
-    newPosition.x += sin(diagonalWave * 0.4 + windSpeed) * 0.1;
-    
-    gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
-    
+    // smaller waves along z-axis --> sin(position * wavelength + time * speed) * amplitude
+    vPosition.z += sin(vPosition.y * 1.0 - uTime * 0.1) * 0.3;
+    vPosition.z += sin(vPosition.y * 0.5 - uTime * 0.3) * 0.6;
+    // vPosition.z += sin(vPosition.y * -2.0 - uTime * 0.2) * 0.5;
+
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(vPosition, 1.0);
 }
 `;
 // ---------------------------------- FRAGMENT SHADER
 const fragmentShader = `
-varying vec3 vPosition;
-varying vec3 vNormal;
-varying vec3 vViewPosition;
 uniform float uTime;
 
+varying vec3 vPosition;
+varying vec3 vNormal;
+varying vec2 vUv;
+
 void main() {
-    // Fresnel calculation
-    vec3 normal = normalize(vNormal);
-    vec3 viewDir = normalize(vViewPosition);
-    float fresnel = 1.0 - max(dot(normal, viewDir), 0.0);
-    
-    // Much sharper fresnel falloff
-    fresnel = pow(fresnel, 4.0);
-    
-    // Additional tightening of the rim
-    fresnel = smoothstep(0.2, 0.8, fresnel);
-    
-    vec3 baseColor = vec3(1.0);
-    vec3 rimColor = vec3(0.7, 0.8, 1.0);
-    vec3 finalColor = mix(baseColor, rimColor, fresnel);
-    
-    // Much lower base opacity and sharper transition
-    float opacity = mix(0.01, 0.7, pow(fresnel, 2.0));
-    
-    gl_FragColor = vec4(finalColor, opacity);
+    gl_FragColor = vec4(1.0, 1.0, 1.0, 0.1);
 }
 `;
 const material = new THREE.ShaderMaterial({
@@ -87,23 +49,17 @@ const material = new THREE.ShaderMaterial({
     uniforms: {
         uTime: { value: 0.0 }
     },
-    transparent: true,
-    side: THREE.DoubleSide,
-    depthWrite: false,
-    blending: THREE.AdditiveBlending
+    transparent: true, // Ensure transparency
+    blending: THREE.AdditiveBlending, // Additive blending for soft overlaps
+    side: THREE.DoubleSide, // Render both sides for smooth transitions
+    depthWrite: false // Disable depth writing to avoid depth sorting issues
 });
 
 // create a plane
-const geometry = new THREE.PlaneGeometry(200, 10, 500, 100);
+const geometry = new THREE.PlaneGeometry(90, 30, 200, 200);
 const mesh = new THREE.Mesh(geometry, material);
-geometry.rotateX(30);
+mesh.rotateX(-Math.PI / 2);
 scene.add(mesh);
-
-// sizing
-const sizes = {
-    width: window.innerWidth,
-    height: window.innerHeight
-};
 
 // light
 const light = new THREE.PointLight(0xffffff, 100, 100);
@@ -113,7 +69,18 @@ scene.add(light);
 // camera
 const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 0.1, 100);
 camera.position.z = 30;
+camera.position.y = 1;
 scene.add(camera);
+
+// axis helper
+const axisHelper = new THREE.AxesHelper(5);
+scene.add(axisHelper);
+
+// sizing
+const sizes = {
+    width: window.innerWidth,
+    height: window.innerHeight
+};
 
 // renderer
 const canvas = document.querySelector('.webgl');
