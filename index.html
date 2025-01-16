@@ -7,62 +7,28 @@
 </head>
 
 <body>
+    <!-- create canvas and background scene -->
     <canvas class="webgl"></canvas>
-    <script type="module" src="/src/scripts/background.js"></script>
+    <script type="module" src="/src/scripts/mainScene.js"></script>
 
-    <div class="radial-menu">
-        <div class="color-option">
-            <input type="radio" id="black" name="gradient" value="black" checked>
-            <label for="black">Black</label>
-        </div>
-
-        <div class="color-option">
-            <input type="radio" id="blue" name="gradient" value="blue">
-            <label for="blue">Blue</label>
-        </div>
-
-        <div class="color-option">
-            <input type="radio" id="brown" name="gradient" value="brown">
-            <label for="brown">Brown</label>
-        </div>
-
-        <div class="color-option">
-            <input type="radio" id="gray" name="gradient" value="gray">
-            <label for="gray">Gray</label>
-        </div>
-
-        <div class="color-option">
-            <input type="radio" id="green" name="gradient" value="green">
-            <label for="green">Green</label>
-        </div>
-
-        <div class="color-option">
-            <input type="radio" id="orange" name="gradient" value="orange">
-            <label for="orange">Orange</label>
-        </div>
-
-        <div class="color-option">
-            <input type="radio" id="red" name="gradient" value="red">
-            <label for="red">Red</label>
-        </div>
-
-        <div class="color-option">
-            <input type="radio" id="teal" name="gradient" value="teal">
-            <label for="teal">Teal</label>
-        </div>
-
-        <div class="color-option">
-            <input type="radio" id="violet" name="gradient" value="violet">
-            <label for="violet">Violet</label>
-        </div>
-
-        <div class="color-option">
-            <input type="radio" id="yellow" name="gradient" value="yellow">
-            <label for="yellow">Yellow</label>
-        </div>
+    <!-- section for theme selector dropdown menu -->
+    <div class="theme-selector">
+        <label for="themes">Theme:</label>
+        <select name="themes" id="themes">
+            <option value="black">Black</option>
+            <option value="blue">Blue</option>
+            <option value="brown">Brown</option>
+            <option value="gray">Gray</option>
+            <option value="green">Green</option>
+            <option value="orange">Orange</option>
+            <option value="red">Red</option>
+            <option value="teal">Teal</option>
+            <option value="violet">Violet</option>
+            <option value="yellow">Yellow</option>
+        </select>
     </div>
-
-    <script type="module" src="src/scripts/menu.js"></script>
+    <!-- load the script for the theme selector -->
+    <script type="module" src="src/scripts/colorChanging.js"></script>
 </body>
 
 </html>

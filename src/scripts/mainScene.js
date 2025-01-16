@@ -4,22 +4,21 @@ import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { SMAAPass } from 'three/examples/jsm/postprocessing/SMAAPass.js';
 
-// importing custom particle system
 import { getParticleSystem } from './particleSystem.js';
 
-// importing shaders from other files
 import fragmentShader from '../shaders/fragment.glsl?raw';
 import vertexShader from '../shaders/vertex.glsl?raw';
 
-// creating a scene
+// creates an empty scene
 const scene = new THREE.Scene();
 
+// easy to refer to the window size
 const sizes = {
     width: window.innerWidth,
     height: window.innerHeight
 };
 
-// resize
+// listens to window size to resize
 window.addEventListener('resize', () => {
     // update sizes
     sizes.width = window.innerWidth;
@@ -30,67 +29,71 @@ window.addEventListener('resize', () => {
     renderer.setSize(sizes.width, sizes.height);
 });
 
-// camera
+// creates and places the camera
 const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 0.1, 200);
-camera.position.z = 60;
-camera.position.y = 5;
+camera.position.set(0, 3, -60);
+camera.lookAt(0, 0, 0)
 scene.add(camera);
 
-// renderer
+// creates the renderer with the window size and transparency to see the css gradient
 const canvas = document.querySelector('.webgl');
 const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+renderer.autoClear = false;
 renderer.setClearColor(0x000000, 0);
 renderer.setSize(sizes.width, sizes.height);
 renderer.render(scene, camera);
 
-// post processing
-const composer = new EffectComposer(renderer);
+// creates the post-processing composer and adds antialiasing
+const composer = new EffectComposer(renderer, );
 const renderScene = new RenderPass(scene, camera);
 const smaaPass = new SMAAPass(window.innerWidth, window.innerHeight);
 composer.addPass(renderScene);
 composer.addPass(smaaPass);
 
-// creating a material
+// creates a material with custom shaders
 const waveMaterial = new THREE.ShaderMaterial({
     vertexShader: vertexShader,
     fragmentShader: fragmentShader,
     uniforms: {
-        uTime: { value: 0.0 }
+        uTime: { value: 0 }
     },
     transparent: true,
     blending: THREE.AdditiveBlending,
-    side: THREE.DoubleSide
+    side: THREE.DoubleSide,
+    depthWrite: false,
+    depthTest: true
 });
 
-// creating a plane
+// creates the mesh for the wave
 const waveGeometry = new THREE.PlaneGeometry(200, 30, 200, 200);
 const waveMesh = new THREE.Mesh(waveGeometry, waveMaterial);
-waveMesh.rotateX(-Math.PI / 2);
+waveMesh.rotateX(1.39626);     // flatten the plane
 scene.add(waveMesh);
 
-// particle system
+// creates the two particle systems for each direction
 const sparklesUp = getParticleSystem({
     camera,
     emitter: waveMesh,
     parent: scene,
-    rate: 1,
-    texture: "../assets/sparkle.png",
+    rate: 3,
+    texture: "../images/sparkle.png",
     velocity: 0.3,
 });
 const sparklesDown = getParticleSystem({
     camera,
     emitter: waveMesh,
     parent: scene,
-    rate: 1,
-    texture: "../assets/sparkle.png",
+    rate: 3,
+    texture: "../images/sparkle.png",
     velocity: -0.3,
 });
 
-const clock = new THREE.Clock();
+const clock = new THREE.Clock(); // gets the time to update animations
+// loop to keep rendering the scene and animating
 function animate() {
     // update the time uniform
     const elapsedTime = clock.getElapsedTime();
-    waveMaterial.uniforms.uTime.value = elapsedTime;
+    waveMaterial.uniforms.uTime.value = elapsedTime; // pass the time into the shader
     
     // update particles
     sparklesUp.update(0.016);
@@ -99,6 +102,7 @@ function animate() {
     // render with post-processing
     composer.render();
     
+    // calls animate to keep running
     requestAnimationFrame(animate);
 }
-animate();
+animate(); // initial call

@@ -67,7 +67,7 @@ function getParticleSystem(params) {
   const { camera, emitter, parent, rate, texture, velocity } = params;
   const uniforms = {
     diffuseTexture: {
-      value: new THREE.TextureLoader().load('/src/assets/sparkle.png')
+      value: new THREE.TextureLoader().load('/src/images/sparkle.png')
     },
     pointMultiplier: {
       value: window.innerHeight / (2.0 * Math.tan(30.0 * Math.PI / 180.0))
@@ -95,8 +95,8 @@ function getParticleSystem(params) {
   parent.add(_points);
 
   const radius = 75;
-  const maxLife = 25.0;
-  const maxSize = 0.25;
+  const maxLife = 5.0;
+  const maxSize = 0.5;
   let timeElapsed = 0;
   let spawnAccumulator = 0; // Add this for consistent spawning
   let _particles = [];
@@ -112,7 +112,7 @@ function getParticleSystem(params) {
     const particle = {
       position: new THREE.Vector3(
         Math.cos(randomAngle) * randomRadius,  // Circular distribution
-        (Math.random() * 1.5 * Math.sign(velocity)), // Height variation
+        (Math.random() * 10.0 * Math.sign(velocity)), // Height variation
         Math.sin(randomAngle) * randomRadius * 0.3  // Circular distribution with scaled z
       ).add(emitter.position),
       size: particleSize,
@@ -169,7 +169,7 @@ function getParticleSystem(params) {
     spawnAccumulator += deltaTime;
 
     // Consistent spawn rate
-    const spawnRate = 0.1; // Spawn every 0.1 seconds
+    const spawnRate = 0.03; // Spawn every 0.1 seconds
     while (spawnAccumulator >= spawnRate) {
       _InitializeParticles();
       spawnAccumulator -= spawnRate;
@@ -198,8 +198,8 @@ function getParticleSystem(params) {
       p.rotation += p.rotationRate;
 
       // Add subtle movement
-      p.velocity.x += (Math.random() - 0.5) * 0.001;
-      p.velocity.z += (Math.random() - 0.5) * 0.001;
+      p.velocity.x += (Math.random() - 0.5) * 0.01;
+      p.velocity.z += (Math.random() - 0.5) * 0.01;
 
       // Bounds checking
       if (Math.abs(p.position.x - emitter.position.x) > radius) {

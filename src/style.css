@@ -1,44 +1,37 @@
-* {
-    overflow: hidden;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-}
 
+/* styling to keep the canvas in the corners with no scroll space,
+background before wave scene is loaded, and background animation transition */
 body {
     margin: 0;
     min-height: 100vh;
     background-color: black;
+    overflow: hidden;
     transition: background 0.5s ease;
+    font-family: 'Roboto', sans-serif;
 }
 
-.radial-menu {
+/* pins dropdown section to the top right corner,
+adds some styling */
+.theme-selector {
     position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 1;
+    top: 0%;
+    right: 0%;
+    padding: 1rem;
+    margin: 0.5rem;
     background-color: rgba(0, 0, 0, 0.5);
-    padding: 2rem;
+    border-radius: 0.5rem;
 }
 
-.color-option {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+/* adds some padding to the right of the dropdown label */
+.theme-selector label {
+    padding-right: 0.5rem;
     color: white;
-    padding-bottom: 1rem;
 }
 
-/* .color-option:last-child {
-    padding-bottom: 0;
-} */
-
-input[type="radio"] {
+/* change mouse over the dropdown button, 
+adds padding inside the dropdown choices */
+.theme-selector select {
     cursor: pointer;
-}
-
-label {
-    cursor: pointer;
-    color: white;
+    font-size: 1rem;
+    padding: 0.25rem;
 }

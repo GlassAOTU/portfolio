@@ -1,14 +1,14 @@
 const colorMap = {
     black: ['#000000', '#161616'],
-    blue: ['#1e349f', '#2c53e8'],
+    blue: ['#1e349f', '#4A5CB2'],
     brown: ['#1f0d00', '#5b3c2f'],
-    gray: ['#6a6a6a', '#8c8c8c'],
-    green: ['#003900', '#117806'],
-    orange: ['#542c00', '#8e5a0c'],
-    red: ['#690000', '#d4312b'],
-    teal: ['#00574e', '#1a8986'],
+    gray: ['#5F5F5F', '#979797'],
+    green: ['#003900', '#28851E'],
+    orange: ['#542C00', '#8e5a0c'],
+    red: ['#500000', '#d4312b'],
+    teal: ['#00574e', '#48C8B9'],
     violet: ['#440052', '#8f2690'],
-    yellow: ['#6d6a15', '#94931f']
+    yellow: ['#69660B', '#94931f']
 };
 
 let startTime = null;
@@ -57,35 +57,35 @@ function animate(timestamp) {
     }
 }
 
-document.querySelectorAll('input[name="gradient"]').forEach(input => {
-    input.addEventListener('change', (e) => {
-        const color = e.target.value;
-        targetGradient = colorMap[color];
+// store the dropdown element by its id
+const themeDropdown = document.getElementById('themes');
 
-        if (animationFrame) {
-            cancelAnimationFrame(animationFrame);
-        }
+// add change event listener to the dropdown that changes the target gradient
+themeDropdown.addEventListener('change', (e) => {
+    const color = e.target.value;
+    targetGradient = colorMap[color];
 
-        startTime = null;
-        animationFrame = requestAnimationFrame(animate);
-    });
+    if (animationFrame) {
+        cancelAnimationFrame(animationFrame);
+    }
+
+    startTime = null;
+    animationFrame = requestAnimationFrame(animate);
+
+    // save last saved gradient to localStorage
+    localStorage.setItem('selectedGradient', color);
 });
 
+// add event listener for when the dom is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    // Retrieve the saved gradient from local storage
+    // retrieve the saved gradient from local storage
     const savedGradient = localStorage.getItem('selectedGradient');
     if (savedGradient) {
         targetGradient = colorMap[savedGradient];
         currentGradient = colorMap[savedGradient];
         document.body.style.background = `linear-gradient(180deg, ${currentGradient[0]}, ${currentGradient[1]})`;
-        document.getElementById(savedGradient).checked = true;
-    }
 
-    // Listen for changes and save the selected gradient
-    document.querySelectorAll('input[name="gradient"]').forEach(input => {
-        input.addEventListener('change', (e) => {
-            const color = e.target.value;
-            localStorage.setItem('selectedGradient', color);
-        });
-    });
+        // set the dropdown to the saved value
+        themeDropdown.value = savedGradient;
+    }
 });
