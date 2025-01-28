@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abaseen's Portfolio</title>
     <link rel="stylesheet" href="./src/style.css">
 </head>
@@ -11,22 +12,135 @@
     <canvas class="webgl"></canvas>
     <script type="module" src="/src/scripts/mainScene.js"></script>
 
-    <!-- section for theme selector dropdown menu -->
-    <div class="theme-selector">
-        <label for="themes">Theme:</label>
-        <select name="themes" id="themes">
-            <option value="black">Black</option>
-            <option value="blue">Blue</option>
-            <option value="brown">Brown</option>
-            <option value="gray">Gray</option>
-            <option value="green">Green</option>
-            <option value="orange">Orange</option>
-            <option value="red">Red</option>
-            <option value="teal">Teal</option>
-            <option value="violet">Violet</option>
-            <option value="yellow">Yellow</option>
-        </select>
+    <div class="main-container">
+        <h1 class="top-header">Welcome to my site</h1>
+        <div class="column-setup">
+            <!-- ! left column -->
+            <div class="column" id="left-column">
+                <div class="item" id="bio">
+                    <h1>
+                        This is where I introduce myself.
+                    </h1>
+                    <p>Lorem ipsum odor amet, consectetuer adipiscing elit. Accumsan in egestas habitasse interdum neque
+                        taciti. Habitasse tempus consectetur eros ac cras mattis leo pulvinar. Auctor pharetra mi
+                        nascetur suscipit nibh litora risus. Aenean malesuada conubia magnis venenatis, nisl ornare
+                        duis. Mi nostra condimentum ac integer ligula nulla dapibus non habitasse. Quam at eget lectus
+                        lectus venenatis tellus. Condimentum erat felis natoque leo sociosqu habitant sem.
+
+                        Massa finibus ornare felis blandit nulla lobortis sit ullamcorper. Mattis habitant ornare morbi
+                        dictum ac potenti sed est. Commodo gravida vehicula, cubilia eget ante leo est. Mus at senectus
+                        congue semper et himenaeos porta parturient sapien. Nostra at feugiat interdum lacinia elit
+                        nostra finibus tortor. Ex turpis duis blandit praesent ac potenti gravida aliquam turpis.
+                        Vehicula natoque tempor curae tortor quisque euismod pulvinar! Convallis et vestibulum libero
+                        nunc at.</p>
+                </div>
+                <div class="item">
+                    <h1>
+                        Education
+                    </h1>
+                    <p>B.S. in Computer Science</p>
+                </div>
+                <div class="item">
+                    <h1>
+                        Projects
+                    </h1>
+                    <p>Lorem ipsum odor amet, consectetuer adipiscing elit. Porttitor vehicula est viverra laoreet sit
+                        facilisis integer.</p>
+                </div>
+                <div class="item">
+
+                    <div class="job-section">
+                        <h1>
+                            Experience
+                        </h1>
+                        <!-- TODO move into its own separate section -->
+                        <div class="job-item">
+                            <h2>
+                                Joseph & Susan Pisacano Memorial Foundation
+                            </h2>
+                            <p>
+                                Lorem ipsum odor amet, consectetuer adipiscing elit. Porttitor vehicula est viverra
+                                laoreet
+                                sit
+                                facilisis integer.
+                            </p>
+                        </div>
+
+                        <h2>
+                            Apple
+                        </h2>
+                        <p>
+                            Lorem ipsum odor amet, consectetuer adipiscing elit. Porttitor vehicula est viverra laoreet
+                            sit
+                            facilisis integer.
+                        </p>
+                        <h2>
+                            Joseph & Susan Pisacano Memorial Foundation
+                        </h2>
+                        <p>
+                            Lorem ipsum odor amet, consectetuer adipiscing elit. Porttitor vehicula est viverra laoreet
+                            sit
+                            facilisis integer.
+                        </p>
+                    </div>
+                </div>
+                <div class="item">
+                    <h1>
+                        Extra
+                    </h1>
+                    <p>Lorem ipsum odor amet, consectetuer adipiscing elit. Porttitor vehicula est viverra laoreet sit
+                        facilisis integer.</p>
+                </div>
+                <div class="item">
+                    <h1>
+                        this is a box
+                    </h1>
+                    <p>Lorem ipsum odor amet, consectetuer adipiscing elit. Porttitor vehicula est viverra laoreet sit
+                        facilisis integer.</p>
+                </div>
+                <div class="item">
+                    <h1>
+                        this is a box
+                    </h1>
+                    <p>Lorem ipsum odor amet, consectetuer adipiscing elit. Porttitor vehicula est viverra laoreet sit
+                        facilisis integer.</p>
+                </div>
+            </div>
+
+            <!-- ! right column -->
+            <div class="column" id="right-column">
+                <div class="item">
+                    <div class="theme-selector" id="theme-selector">
+                        <label for="theme-select">Theme:</label>
+                        <select id="theme-select">
+                            <option value="black">Black</option>
+                            <option value="blue">Blue</option>
+                            <option value="brown">Brown</option>
+                            <option value="gray">Gray</option>
+                            <option value="green">Green</option>
+                            <option value="orange">Orange</option>
+                            <option value="red">Red</option>
+                            <option value="teal">Teal</option>
+                            <option value="violet">Violet</option>
+                            <option value="yellow">Yellow</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="item">
+                    <h2>
+                        Find me at these places:
+                    </h2>
+                    <ul id="contact-list">
+                        <li>GitHub</li>
+                        <li>LinkedIn</li>
+                        <li>Discord</li>
+                        <li>Twitter</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
+
     <!-- load the script for the theme selector -->
     <script type="module" src="src/scripts/colorChanging.js"></script>
 </body>

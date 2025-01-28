@@ -37,7 +37,7 @@ scene.add(camera);
 
 // creates the renderer with the window size and transparency to see the css gradient
 const canvas = document.querySelector('.webgl');
-const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, powerPreference: "high-performance" });
 renderer.autoClear = false;
 renderer.setClearColor(0x000000, 0);
 renderer.setSize(sizes.width, sizes.height);
@@ -88,20 +88,43 @@ const sparklesDown = getParticleSystem({
     velocity: -0.3,
 });
 
+
+
+
+
+
+
+
+
+
+let isTabActive = true;
+
+// Add visibility change listener
+document.addEventListener('visibilitychange', () => {
+    isTabActive = !document.hidden;
+});
+
+
+
+
+
+
 const clock = new THREE.Clock(); // gets the time to update animations
 // loop to keep rendering the scene and animating
 function animate() {
     // update the time uniform
-    const elapsedTime = clock.getElapsedTime();
-    waveMaterial.uniforms.uTime.value = elapsedTime; // pass the time into the shader
-    
-    // update particles
-    sparklesUp.update(0.016);
-    sparklesDown.update(0.016);
-    
-    // render with post-processing
-    composer.render();
-    
+    if (isTabActive) {
+        const elapsedTime = clock.getElapsedTime();
+        waveMaterial.uniforms.uTime.value = elapsedTime; // pass the time into the shader
+        
+        // update particles
+        sparklesUp.update(0.016);
+        sparklesDown.update(0.016);
+        
+        // render with post-processing
+        composer.render();
+        
+    }
     // calls animate to keep running
     requestAnimationFrame(animate);
 }

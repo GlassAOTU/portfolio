@@ -1,3 +1,15 @@
+@font-face {
+    font-family: 'Boston';
+    src: url('./centurygothic.ttf');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+* {
+    font-family: "Boston", "Tahoma" !important;
+}
 
 /* styling to keep the canvas in the corners with no scroll space,
 background before wave scene is loaded, and background animation transition */
@@ -5,21 +17,159 @@ body {
     margin: 0;
     min-height: 100vh;
     background-color: black;
-    overflow: hidden;
     transition: background 0.5s ease;
-    font-family: 'Roboto', sans-serif;
+    display: flex;
 }
 
+h1, h2 {
+    margin-top: 0;
+}
+
+/* lining up the threejs canvas behind the UI */
+.webgl {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.top-header {
+    color: white;
+    text-align: center;
+    font-size: 32px;
+}
+
+
+#contact-list {
+    padding: 0;
+}
+
+/* sets the main container to 900px and centers it */
+.main-container {
+    z-index: 2;
+    max-width: 1280px;
+    margin: 5rem auto;
+}
+
+/* sets up the two columns next to eachother as two tall rows and adds a gap between each column */
+.column-setup {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+/* sets items in the column and adds a gap between them */
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* left column is larger */
+#left-column {
+    flex: 3;
+    align-self: flex-start;
+}
+
+/* right column is smaller */
+#right-column {
+    flex: 1;
+    align-self: flex-start;
+}
+
+/* ! styling for the items themselves */
+.item {
+    background: linear-gradient(to bottom, rgba(54, 54, 54, 0.8), rgba(0, 0, 0, 0.5));
+    max-height: fit-content;
+    padding: 2rem;
+    border-radius: 0.25rem;
+    color: white;
+    box-shadow: 0px 0px 0px 2px rgba(29, 29, 29, 0.5) inset;
+
+    /* padding-top: 0; */
+}
+
+.item:hover {
+    box-shadow: 0px 0px 0px 2px rgba(44, 44, 44, 1) inset;
+    transition: box-shadow 0.1s ease;
+}
+
+.job-section h2, .job-section p {
+    margin: 0;
+}
+
+.job-section h2 {
+    margin-top: 1rem;
+}
+
+.job-section h2:first-child {
+    padding-top: 0;
+}
+
+.job-section p {
+    margin-top: 0.25rem;
+}
+
+ul#contact-list {
+    padding-left: 1rem;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* * theme selector */
 /* pins dropdown section to the top right corner,
 adds some styling */
 .theme-selector {
-    position: fixed;
-    top: 0%;
-    right: 0%;
-    padding: 1rem;
-    margin: 0.5rem;
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 0.5rem;
+    z-index: 2;
 }
 
 /* adds some padding to the right of the dropdown label */
@@ -34,4 +184,10 @@ adds padding inside the dropdown choices */
     cursor: pointer;
     font-size: 1rem;
     padding: 0.25rem;
+}
+
+.theme-selector option {
+    cursor: pointer;
+    font-size: 1rem;
+    /* padding: 0.25rem; */
 }

@@ -58,7 +58,7 @@ function animate(timestamp) {
 }
 
 // store the dropdown element by its id
-const themeDropdown = document.getElementById('themes');
+const themeDropdown = document.getElementById('theme-selector');
 
 // add change event listener to the dropdown that changes the target gradient
 themeDropdown.addEventListener('change', (e) => {
