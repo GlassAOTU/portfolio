@@ -47,6 +47,8 @@ function animate(timestamp) {
     const color2 = lerp(currentGradient[1], targetGradient[1], progress);
 
     document.body.style.background = `linear-gradient(180deg, ${color1}, ${color2})`;
+    document.body.style.backgroundAttachment = 'fixed'; // Fix the background
+    document.body.style.backgroundSize = 'cover'; // Ensure it covers the viewport
 
     if (progress < 1) {
         animationFrame = requestAnimationFrame(animate);
@@ -57,10 +59,10 @@ function animate(timestamp) {
     }
 }
 
-// store the dropdown element by its id
+// Store the dropdown element by its id
 const themeDropdown = document.getElementById('theme-selector');
 
-// add change event listener to the dropdown that changes the target gradient
+// Add change event listener to the dropdown that changes the target gradient
 themeDropdown.addEventListener('change', (e) => {
     const color = e.target.value;
     targetGradient = colorMap[color];
@@ -72,20 +74,22 @@ themeDropdown.addEventListener('change', (e) => {
     startTime = null;
     animationFrame = requestAnimationFrame(animate);
 
-    // save last saved gradient to localStorage
+    // Save last saved gradient to localStorage
     localStorage.setItem('selectedGradient', color);
 });
 
-// add event listener for when the dom is loaded
+// Add event listener for when the DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    // retrieve the saved gradient from local storage
+    // Retrieve the saved gradient from local storage
     const savedGradient = localStorage.getItem('selectedGradient');
     if (savedGradient) {
         targetGradient = colorMap[savedGradient];
         currentGradient = colorMap[savedGradient];
         document.body.style.background = `linear-gradient(180deg, ${currentGradient[0]}, ${currentGradient[1]})`;
+        document.body.style.backgroundAttachment = 'fixed'; // Fix the background
+        document.body.style.backgroundSize = 'cover'; // Ensure it covers the viewport
 
-        // set the dropdown to the saved value
+        // Set the dropdown to the saved value
         themeDropdown.value = savedGradient;
     }
 });

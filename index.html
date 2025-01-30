@@ -15,101 +15,101 @@
     <div class="main-container">
         <h1 class="top-header">Welcome to my site</h1>
         <div class="column-setup">
+
             <!-- ! left column -->
             <div class="column" id="left-column">
-                <div class="item" id="bio">
-                    <h1>
-                        This is where I introduce myself.
-                    </h1>
-                    <p>Lorem ipsum odor amet, consectetuer adipiscing elit. Accumsan in egestas habitasse interdum neque
-                        taciti. Habitasse tempus consectetur eros ac cras mattis leo pulvinar. Auctor pharetra mi
-                        nascetur suscipit nibh litora risus. Aenean malesuada conubia magnis venenatis, nisl ornare
-                        duis. Mi nostra condimentum ac integer ligula nulla dapibus non habitasse. Quam at eget lectus
-                        lectus venenatis tellus. Condimentum erat felis natoque leo sociosqu habitant sem.
+                <nav class="item toc" id="toc">
+                    <h3 class="item-heading"><img src="/src/images/book.svg" alt="book icon" class="icon">Table of Contents</h3>
+                    <div class="links">
+                        <ol id="toc-list">
+                            <li><a href="#intro">Introduction</a></li>
+                            <li><a href="#education">Education</a></li>
+                            <li><a href="#projects">Projects</a></li>
+                            <li><a href="#experience">Experience</a></li>
+                        </ol>
+                    </div>
+                </nav>
+            </div>
 
-                        Massa finibus ornare felis blandit nulla lobortis sit ullamcorper. Mattis habitant ornare morbi
-                        dictum ac potenti sed est. Commodo gravida vehicula, cubilia eget ante leo est. Mus at senectus
-                        congue semper et himenaeos porta parturient sapien. Nostra at feugiat interdum lacinia elit
-                        nostra finibus tortor. Ex turpis duis blandit praesent ac potenti gravida aliquam turpis.
-                        Vehicula natoque tempor curae tortor quisque euismod pulvinar! Convallis et vestibulum libero
-                        nunc at.</p>
-                </div>
-                <div class="item">
-                    <h1>
+            <!-- ! middle column -->
+            <div class="column" id="middle-column">
+                <section class="item" id="intro">
+                    <h1 class="item-heading">
+                        <img src="/src/images/person.svg" alt="person icon smiling" class="icon">
+                        About Me
+                    </h1>
+                    <p>I am a full-stack software engineer</p>
+                </section>
+                <section class="item" id="education">
+                    <h1 class="item-heading">
+                        <img src="/src/images/grad-cap.svg" alt="graduation cap icon" class="icon">
                         Education
                     </h1>
-                    <p>B.S. in Computer Science</p>
-                </div>
-                <div class="item">
-                    <h1>
+                    <p>B.S. in Computer Science, SUNY Old Westbury</p>
+                </section>
+                <section class="item" id="projects">
+                    <h1 class="item-heading">
+                        <img src="/src/images/puzzle.svg" alt="puzzle piece icon" class="icon">
                         Projects
                     </h1>
                     <p>Lorem ipsum odor amet, consectetuer adipiscing elit. Porttitor vehicula est viverra laoreet sit
                         facilisis integer.</p>
-                </div>
-                <div class="item">
-
-                    <div class="job-section">
-                        <h1>
-                            Experience
-                        </h1>
-                        <!-- TODO move into its own separate section -->
-                        <div class="job-item">
-                            <h2>
-                                Joseph & Susan Pisacano Memorial Foundation
-                            </h2>
-                            <p>
-                                Lorem ipsum odor amet, consectetuer adipiscing elit. Porttitor vehicula est viverra
-                                laoreet
-                                sit
-                                facilisis integer.
-                            </p>
-                        </div>
-
-                        <h2>
-                            Apple
-                        </h2>
-                        <p>
-                            Lorem ipsum odor amet, consectetuer adipiscing elit. Porttitor vehicula est viverra laoreet
-                            sit
-                            facilisis integer.
-                        </p>
+                </section>
+                <section class="item" id="experience">
+                    <h1 class="item-heading">
+                        <img src="/src/images/suitcase.svg" alt="suitcase icon" class="icon">
+                        Experience
+                    </h1>
+                    <!-- TODO move into its own separate section -->
+                    <div class="job-item">
                         <h2>
                             Joseph & Susan Pisacano Memorial Foundation
                         </h2>
                         <p>
-                            Lorem ipsum odor amet, consectetuer adipiscing elit. Porttitor vehicula est viverra laoreet
+                            Lorem ipsum odor amet, consectetuer adipiscing elit. Porttitor vehicula est viverra
+                            laoreet
                             sit
                             facilisis integer.
                         </p>
                     </div>
-                </div>
-                <div class="item">
+
+                    <div class="job-item">
+                        <h2>
+                            Apple
+                        </h2>
+                        <p>
+                            Lorem ipsum odor amet, consectetuer adipiscing elit. Porttitor vehicula est viverra
+                            laoreet
+                            sit
+                            facilisis integer.
+                        </p>
+                    </div>
+
+                    <div class="job-item">
+                        <h2>
+                            Joseph & Susan Pisacano Memorial Foundation
+                        </h2>
+                        <p>
+                            Lorem ipsum odor amet, consectetuer adipiscing elit. Porttitor vehicula est viverra
+                            laoreet
+                            sit
+                            facilisis integer.
+                        </p>
+                    </div>
+                </section>
+                <section class="item">
                     <h1>
                         Extra
                     </h1>
                     <p>Lorem ipsum odor amet, consectetuer adipiscing elit. Porttitor vehicula est viverra laoreet sit
                         facilisis integer.</p>
-                </div>
-                <div class="item">
-                    <h1>
-                        this is a box
-                    </h1>
-                    <p>Lorem ipsum odor amet, consectetuer adipiscing elit. Porttitor vehicula est viverra laoreet sit
-                        facilisis integer.</p>
-                </div>
-                <div class="item">
-                    <h1>
-                        this is a box
-                    </h1>
-                    <p>Lorem ipsum odor amet, consectetuer adipiscing elit. Porttitor vehicula est viverra laoreet sit
-                        facilisis integer.</p>
-                </div>
+                </section>
             </div>
 
             <!-- ! right column -->
             <div class="column" id="right-column">
-                <div class="item">
+                <!-- ! hiding color switcher for now -->
+                <!-- <div class="item">
                     <div class="theme-selector" id="theme-selector">
                         <label for="theme-select">Theme:</label>
                         <select id="theme-select">
@@ -125,18 +125,20 @@
                             <option value="yellow">Yellow</option>
                         </select>
                     </div>
-                </div>
-                <div class="item">
-                    <h2>
-                        Find me at these places:
-                    </h2>
-                    <ul id="contact-list">
-                        <li>GitHub</li>
-                        <li>LinkedIn</li>
-                        <li>Discord</li>
-                        <li>Twitter</li>
-                    </ul>
-                </div>
+                </div> -->
+                <nav class="item">
+                    <h3 class="item-heading">
+                        <img src="/src/images/internet.svg" alt="internet globe icon" class="icon">
+                        Reach me here:
+                    </h3>
+                    <div class="links">
+                        <ul id="contact-list">
+                            <li><img src="/src/images/github-mark-white.svg" alt="" class="social-icons">GitHub</li>
+                            <li><img src="/src/images/linkedin.svg" alt="" class="social-icons">LinkedIn</li>
+                            <li><img src="/src/images/gmail.svg" alt="" class="social-icons">Gmail</li>
+                        </ul>
+                    </div>
+                </nav>
             </div>
         </div>
     </div>

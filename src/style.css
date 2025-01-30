@@ -1,3 +1,5 @@
+/* ! general styling */
+
 @font-face {
     font-family: 'Boston';
     src: url('./centurygothic.ttf');
@@ -6,23 +8,21 @@
     font-display: swap;
 }
 
-
 * {
     font-family: "Boston", "Tahoma" !important;
+    scroll-behavior: smooth;
+    padding: 0;
+    margin: 0;
 }
 
 /* styling to keep the canvas in the corners with no scroll space,
-background before wave scene is loaded, and background animation transition */
+background before wave scene is loaded,
+background animation transition */
 body {
-    margin: 0;
     min-height: 100vh;
     background-color: black;
     transition: background 0.5s ease;
     display: flex;
-}
-
-h1, h2 {
-    margin-top: 0;
 }
 
 /* lining up the threejs canvas behind the UI */
@@ -33,75 +33,113 @@ h1, h2 {
     z-index: 1;
 }
 
+/* ---------------------------------------------------------------------------------------------------------------------------------------------------- */
+/* ! styling for the items boxes and the contents */
 
+.item {
+    background: linear-gradient(to bottom, rgba(54, 54, 54, 0.7), rgba(0, 0, 0, 0.5));
+    max-height: fit-content;
+    padding: 2rem;
+    border-radius: 0.25rem;
+    color: white;
+    box-shadow: 0px 0px 0px 2px rgba(29, 29, 29, 0.5) inset;
+    transition: box-shadow 0.2s ease;
+}
 
+.item:hover {
+    /* background: linear-gradient(to bottom, rgba(54, 54, 54, 0.7), rgba(0, 0, 0, 0.4)); */
+    box-shadow: 0px 0px 0px 2px rgba(44, 44, 44, 1) inset;
+}
 
+.item h1 {
+    margin-bottom: 1.5rem;
+    text-shadow: rgba(255, 255, 255, 0) 0px 0px 0px;
+    transition: text-shadow 0.2s ease;
+}
 
+.item:hover h1 {
+    text-shadow: rgba(255, 255, 255, 0.8) 0px 0px 10px;
+}
 
+.item h2 {
+    margin-bottom: 0.5rem;
+}
 
+.item h2:last-child {
+    margin-bottom: 0;
+}
 
+.item h3 {
+    margin-bottom: 0.75rem;
+    text-shadow: rgba(255, 255, 255, 0) 0px 0px 0px;
+    transition: text-shadow 0.2s ease;
+}
 
+.item:hover h3 {
+    text-shadow: rgba(255, 255, 255, 0.8) 0px 0px 10px;
+}
 
+.item-heading {
+    display: flex;
+    align-items: center;
+}
 
+.item-heading img {
+    padding-right: 1rem;
+}
 
+.icon {
+    filter: drop-shadow(0 0 0 rgba(255, 255, 255, 0)); /* Initial state: no glow */
+    transition: filter 0.2s ease; /* Smooth transition for the glow effect */
+}
 
+.item:hover .icon {
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.9)); /* Glow effect on hover */
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* ---------------------------------------------------------------------------------------------------------------------------------------------------- */
+/* ! main container and columns */
 
 .top-header {
     color: white;
     text-align: center;
     font-size: 32px;
+    margin-bottom: 2rem;
 }
 
-
-#contact-list {
-    padding: 0;
-}
-
-/* sets the main container to 900px and centers it */
+/* sets the main container to 900px, 
+centers it */
 .main-container {
     z-index: 2;
-    max-width: 1280px;
+    max-width: 1600px;
     margin: 5rem auto;
 }
 
-/* sets up the two columns next to eachother as two tall rows and adds a gap between each column */
+/* sets up the two columns next to eachother as two tall rows,
+adds a gap between each column */
 .column-setup {
     display: flex;
     flex-direction: row;
     gap: 1rem;
 }
 
-/* sets items in the column and adds a gap between them */
+/* sets items in the column, 
+adds a gap between them */
 .column {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
-/* left column is larger */
+/* left column is smaller */
 #left-column {
+    align-self: flex-start;
+    position: sticky;
+    top: 50px;
+}
+
+/* middle column is larger */
+#middle-column {
     flex: 3;
     align-self: flex-start;
 }
@@ -112,60 +150,80 @@ h1, h2 {
     align-self: flex-start;
 }
 
-/* ! styling for the items themselves */
-.item {
-    background: linear-gradient(to bottom, rgba(54, 54, 54, 0.8), rgba(0, 0, 0, 0.5));
-    max-height: fit-content;
-    padding: 2rem;
-    border-radius: 0.25rem;
+/* * hide right column on mobile */
+@media screen and (max-width: 768px) {
+    #right-column {
+        display: none;
+    }
+}
+
+/* ---------------------------------------------------------------------------------------------------------------------------------------------------- */
+/* ! table of contents */
+
+#toc li {
+    list-style-type: none;
+}
+
+#toc a {
     color: white;
-    box-shadow: 0px 0px 0px 2px rgba(29, 29, 29, 0.5) inset;
-
-    /* padding-top: 0; */
+    text-decoration: none;
 }
 
-.item:hover {
-    box-shadow: 0px 0px 0px 2px rgba(44, 44, 44, 1) inset;
-    transition: box-shadow 0.1s ease;
+#toc a:hover {
+    text-decoration: underline;
 }
 
-.job-section h2, .job-section p {
-    margin: 0;
+#toc-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
 }
 
-.job-section h2 {
-    margin-top: 1rem;
+.links {
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
 }
 
-.job-section h2:first-child {
-    padding-top: 0;
+/* ---------------------------------------------------------------------------------------------------------------------------------------------------- */
+/* ! job section */
+
+.job-item {
+    margin-bottom: 1rem;
 }
 
-.job-section p {
-    margin-top: 0.25rem;
+/* ---------------------------------------------------------------------------------------------------------------------------------------------------- */
+/* ! contact list */
+
+#contact-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 0.75rem;
 }
 
-ul#contact-list {
-    padding-left: 1rem;
-  }
+#contact-list ol {
+    display: flex;
+}
 
+#contact-list li {
+    /* padding-left: 1rem; */
+    /* text-align: center; */
+    list-style-type: none;
+    display: inline-flex;
+    align-items: center;
+}
 
+.social-icons {
+    width: 20px;
+    height: 20px;
+    padding-right: 0.5rem;
+    /* margin: 10px 0; */
+}
 
+/* ---------------------------------------------------------------------------------------------------------------------------------------------------- */
+/* ! theme selector */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* * theme selector */
 /* pins dropdown section to the top right corner,
 adds some styling */
 .theme-selector {

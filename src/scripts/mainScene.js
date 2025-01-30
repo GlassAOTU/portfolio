@@ -58,7 +58,7 @@ const waveMaterial = new THREE.ShaderMaterial({
         uTime: { value: 0 }
     },
     transparent: true,
-    blending: THREE.AdditiveBlending,
+    blending: THREE.NormalBlending,
     side: THREE.DoubleSide,
     depthWrite: false,
     depthTest: true
@@ -94,37 +94,21 @@ const sparklesDown = getParticleSystem({
 
 
 
-
-
-
-let isTabActive = true;
-
-// Add visibility change listener
-document.addEventListener('visibilitychange', () => {
-    isTabActive = !document.hidden;
-});
-
-
-
-
-
-
 const clock = new THREE.Clock(); // gets the time to update animations
 // loop to keep rendering the scene and animating
 function animate() {
     // update the time uniform
-    if (isTabActive) {
-        const elapsedTime = clock.getElapsedTime();
-        waveMaterial.uniforms.uTime.value = elapsedTime; // pass the time into the shader
-        
-        // update particles
-        sparklesUp.update(0.016);
-        sparklesDown.update(0.016);
-        
-        // render with post-processing
-        composer.render();
-        
-    }
+
+    const elapsedTime = clock.getElapsedTime();
+    waveMaterial.uniforms.uTime.value = elapsedTime; // pass the time into the shader
+    
+    // update particles
+    sparklesUp.update(0.016);
+    sparklesDown.update(0.016);
+    
+    // render with post-processing
+    composer.render();
+
     // calls animate to keep running
     requestAnimationFrame(animate);
 }
