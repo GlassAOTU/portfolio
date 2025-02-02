@@ -8,7 +8,7 @@ void main() {
     vec3 distortedNormal = normal;
     
     // Original X waves
-    float xWave1 = sin(vPosition.x * -0.05 - uTime * 0.2) * 5.0;
+    float xWave1 = sin(vPosition.x * -0.04 - uTime * 0.15) * 5.0;
     float xWave2 = sin(vPosition.x * -0.15 - uTime * 0.5) * 0.2;
     
     // Enhanced Y waves with more variation

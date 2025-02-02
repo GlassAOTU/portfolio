@@ -15,88 +15,163 @@
     <div class="main-container">
         <h1 class="top-header">Welcome to my site</h1>
         <div class="column-setup">
-
             <!-- ! left column -->
             <div class="column" id="left-column">
-                <nav class="item toc" id="toc">
-                    <h3 class="item-heading"><img src="/src/images/book.svg" alt="book icon" class="icon">Table of Contents</h3>
-                    <div class="links">
-                        <ol id="toc-list">
-                            <li><a href="#intro">Introduction</a></li>
-                            <li><a href="#education">Education</a></li>
-                            <li><a href="#projects">Projects</a></li>
-                            <li><a href="#experience">Experience</a></li>
-                        </ol>
-                    </div>
-                </nav>
-            </div>
-
-            <!-- ! middle column -->
-            <div class="column" id="middle-column">
                 <section class="item" id="intro">
                     <h1 class="item-heading">
                         <img src="/src/images/person.svg" alt="person icon smiling" class="icon">
                         About Me
                     </h1>
-                    <p>I am a full-stack software engineer</p>
+                    <p>I am a full-stack software engineer from Huntington, NY.</p>
                 </section>
+
+                <!-- ! mobile social links -->
+                <section class="item" id="mobile-sitemap">
+                    <nav class="links">
+                        <ul id="mobile-contact-list">
+                            <li>
+                                <img src="/src/images/github-mark-white.svg" alt="" class="social-icons">
+                                <a href="https://github.com/GlassAOTU">GitHub</a>
+                            </li>
+                            <li>
+                                <img src="/src/images/linkedin.svg" alt="" class="social-icons">
+                                <a href="https://www.linkedin.com/in/abaseen-khan/">LinkedIn</a>
+                            </li>
+                            <li>
+                                <img src="/src/images/gmail.svg" alt="" class="social-icons">
+                                Gmail
+                            </li>
+                        </ul>
+                    </nav>
+                </section>
+
+                <!-- ! education section -->
                 <section class="item" id="education">
                     <h1 class="item-heading">
                         <img src="/src/images/grad-cap.svg" alt="graduation cap icon" class="icon">
                         Education
                     </h1>
-                    <p>B.S. in Computer Science, SUNY Old Westbury</p>
+                    <p><i>B.S. in Computer Science, SUNY Old Westbury</i></p>
+                    <br>
+                    <h4>Relevant Coursework</h4>
+                    <nav>
+                        <ul style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.2rem;">
+                            <ol>System Design & Implementation</ol>
+                            <ol>Data Structures & Algorithms</ol>
+                            <ol>Operating Systems</ol>
+                            <ol>Database Management</ol>
+                            <ol>Computer Networks</ol>
+                            <ol>Computer Architecture</ol>
+                        </ul>
+                    </nav>
                 </section>
+
+                <section class="item" id="skills">
+                    <h1 class="item-heading">
+                        <img src="/src/images/wrench.svg" alt="graduation cap icon" class="icon">
+                        Skills
+                    </h1>
+                    <nav>
+                        <ul style="display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 0.2rem">
+                            <ol class="skills-row"><img src="/src/images/python.svg" alt="" class="skills-icons">Python
+                            </ol>
+                            <ol class="skills-row"><img src="/src/images/java.svg" alt="" class="skills-icons">Java</ol>
+                            <ol class="skills-row"><img src="/src/images/javascript.svg" alt=""
+                                    class="skills-icons">JavaScript</ol>
+                            <ol class="skills-row"><img src="/src/images/swift.svg" alt="" class="skills-icons">Swift
+                            </ol>
+                            <ol class="skills-row"><img src="/src/images/react_dark.svg" alt=""
+                                    class="skills-icons">React</ol>
+                            <ol class="skills-row"><img src="/src/images/csharp.svg" alt="" class="skills-icons">C#</ol>
+                        </ul>
+                    </nav>
+                </section>
+
+                <!-- ! project section -->
                 <section class="item" id="projects">
                     <h1 class="item-heading">
-                        <img src="/src/images/puzzle.svg" alt="puzzle piece icon" class="icon">
+                        <img src="/src/images/folder.svg" alt="folder icon" class="icon">
                         Projects
                     </h1>
-                    <p>Lorem ipsum odor amet, consectetuer adipiscing elit. Porttitor vehicula est viverra laoreet sit
-                        facilisis integer.</p>
+                    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                        <div>
+                            <h2>
+                                NeighborhoodPins
+                            </h2>
+                            <nav class="links">
+                                <a href="https://www.neighborhoodpins.com" target="_blank">(Link)</a>
+                                <a href="https://github.com/GlassAOTU/neighborhoodpins" target="_blank">(Source)</a>
+                            </nav>
+                            <p>
+                                I worked with another colleague to create a responsive website that allows users to
+                                mark points on a map, where there are hazards on all roads in their respective
+                                counties on Long Island. I utilized HTML, Tailwind CSS, Javascript, and Postgres
+                                databases to store and display map points and their information. The whole project
+                                was written on top of Next.js and hosted on Vercel.
+                            </p>
+                        </div>
+                        <div>
+                            <h2>
+                                This Portfolio Website
+                            </h2>
+                            <nav class="links">
+                                <a href="https://github.com/GlassAOTU/neighborhoodpins" target="_blank">(Source)</a>
+                            </nav>
+                            <p>
+                                I developed this portfolio website using Vite for fast builds and optimized
+                                performance. Built with clean, semantic HTML and CSS to ensure accessibility and
+                                responsiveness across devices.
+                            </p>
+                        </div>
+                    </div>
+
                 </section>
+
+                <!-- ! professional experience section -->
                 <section class="item" id="experience">
                     <h1 class="item-heading">
                         <img src="/src/images/suitcase.svg" alt="suitcase icon" class="icon">
                         Experience
                     </h1>
-                    <!-- TODO move into its own separate section -->
-                    <div class="job-item">
-                        <h2>
-                            Joseph & Susan Pisacano Memorial Foundation
-                        </h2>
-                        <p>
-                            Lorem ipsum odor amet, consectetuer adipiscing elit. Porttitor vehicula est viverra
-                            laoreet
-                            sit
-                            facilisis integer.
-                        </p>
-                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                        <div class="job-item">
+                            <h2>
+                                Joseph & Susan Pisacano Memorial Foundation
+                            </h2>
+                            <p>
+                                Lorem ipsum odor amet, consectetuer adipiscing elit. Porttitor vehicula est viverra
+                                laoreet
+                                sit
+                                facilisis integer.
+                            </p>
+                        </div>
 
-                    <div class="job-item">
-                        <h2>
-                            Apple
-                        </h2>
-                        <p>
-                            Lorem ipsum odor amet, consectetuer adipiscing elit. Porttitor vehicula est viverra
-                            laoreet
-                            sit
-                            facilisis integer.
-                        </p>
-                    </div>
+                        <div class="job-item">
+                            <h2>
+                                Apple
+                            </h2>
+                            <p>
+                                Lorem ipsum odor amet, consectetuer adipiscing elit. Porttitor vehicula est viverra
+                                laoreet
+                                sit
+                                facilisis integer.
+                            </p>
+                        </div>
 
-                    <div class="job-item">
-                        <h2>
-                            Joseph & Susan Pisacano Memorial Foundation
-                        </h2>
-                        <p>
-                            Lorem ipsum odor amet, consectetuer adipiscing elit. Porttitor vehicula est viverra
-                            laoreet
-                            sit
-                            facilisis integer.
-                        </p>
+                        <div class="job-item">
+                            <h2>
+                                Joseph & Susan Pisacano Memorial Foundation
+                            </h2>
+                            <p>
+                                Lorem ipsum odor amet, consectetuer adipiscing elit. Porttitor vehicula est viverra
+                                laoreet
+                                sit
+                                facilisis integer.
+                            </p>
+                        </div>
                     </div>
                 </section>
+
                 <section class="item">
                     <h1>
                         Extra
@@ -120,25 +195,47 @@
                             <option value="green">Green</option>
                             <option value="orange">Orange</option>
                             <option value="red">Red</option>
-                            <option value="teal">Teal</option>
+                            <option value="teal">Teal</option
                             <option value="violet">Violet</option>
                             <option value="yellow">Yellow</option>
                         </select>
                     </div>
                 </div> -->
-                <nav class="item">
+                <section class="item toc" id="toc">
+                    <h3 class="item-heading"><img src="/src/images/book.svg" alt="book icon" class="icon">Sitemap</h3>
+                    <nav class="links">
+                        <ol class="links-list">
+                            <li><a href="#">About Me</a></li>
+                            <li><a href="#education">Education</a></li>
+                            <li><a href="#skills">Skills</a></li>
+                            <li><a href="#projects">Projects</a></li>
+                            <li><a href="#experience">Experience</a></li>
+                        </ol>
+                    </nav>
+                </section>
+
+                <section class="item" id="social">
                     <h3 class="item-heading">
                         <img src="/src/images/internet.svg" alt="internet globe icon" class="icon">
-                        Reach me here:
+                        Contact
                     </h3>
-                    <div class="links">
-                        <ul id="contact-list">
-                            <li><img src="/src/images/github-mark-white.svg" alt="" class="social-icons">GitHub</li>
-                            <li><img src="/src/images/linkedin.svg" alt="" class="social-icons">LinkedIn</li>
-                            <li><img src="/src/images/gmail.svg" alt="" class="social-icons">Gmail</li>
+                    <nav class="links">
+                        <ul class="links-list">
+                            <li>
+                                <img src="/src/images/github-mark-white.svg" alt="" class="social-icons">
+                                <a href="https://github.com/GlassAOTU" target="_blank">GitHub</a>
+                            </li>
+                            <li>
+                                <img src="/src/images/linkedin.svg" alt="" class="social-icons">
+                                <a href="https://www.linkedin.com/in/abaseen-khan/" target="_blank">LinkedIn</a>
+                            </li>
+                            <li>
+                                <img src="/src/images/gmail.svg" alt="" class="social-icons">
+                                Gmail
+                            </li>
                         </ul>
-                    </div>
-                </nav>
+                    </nav>
+                </section>
             </div>
         </div>
     </div>

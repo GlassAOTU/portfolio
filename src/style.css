@@ -1,7 +1,7 @@
 /* ! general styling */
 
 @font-face {
-    font-family: 'Boston';
+    font-family: 'CenturyGothic';
     src: url('./centurygothic.ttf');
     font-weight: normal;
     font-style: normal;
@@ -9,7 +9,7 @@
 }
 
 * {
-    font-family: "Boston", "Tahoma" !important;
+    font-family: "CenturyGothic", "Tahoma" !important;
     scroll-behavior: smooth;
     padding: 0;
     margin: 0;
@@ -20,8 +20,8 @@ background before wave scene is loaded,
 background animation transition */
 body {
     min-height: 100vh;
-    background-color: black;
-    transition: background 0.5s ease;
+    background: linear-gradient(to bottom, rgb(0, 0, 0), rgb(0, 46, 36));
+    background-attachment: fixed;
     display: flex;
 }
 
@@ -37,7 +37,7 @@ body {
 /* ! styling for the items boxes and the contents */
 
 .item {
-    background: linear-gradient(to bottom, rgba(54, 54, 54, 0.7), rgba(0, 0, 0, 0.5));
+    background: linear-gradient(to bottom, rgba(35, 35, 35, 0.7), rgba(0, 0, 0, 0.5));
     max-height: fit-content;
     padding: 2rem;
     border-radius: 0.25rem;
@@ -47,8 +47,8 @@ body {
 }
 
 .item:hover {
-    /* background: linear-gradient(to bottom, rgba(54, 54, 54, 0.7), rgba(0, 0, 0, 0.4)); */
-    box-shadow: 0px 0px 0px 2px rgba(44, 44, 44, 1) inset;
+    background: linear-gradient(to bottom, rgba(50, 50, 50, 0.8), rgba(0, 0, 0, 0.5));
+    box-shadow: 0px 0px 0px 2px rgb(53, 53, 53) inset;
 }
 
 .item h1 {
@@ -79,6 +79,10 @@ body {
     text-shadow: rgba(255, 255, 255, 0.8) 0px 0px 10px;
 }
 
+.item h4 {
+    padding-bottom: 0.25rem;
+}
+
 .item-heading {
     display: flex;
     align-items: center;
@@ -89,12 +93,15 @@ body {
 }
 
 .icon {
-    filter: drop-shadow(0 0 0 rgba(255, 255, 255, 0)); /* Initial state: no glow */
-    transition: filter 0.2s ease; /* Smooth transition for the glow effect */
+    filter: drop-shadow(0 0 0 rgba(255, 255, 255, 0));
+    /* Initial state: no glow */
+    transition: filter 0.2s ease;
+    /* Smooth transition for the glow effect */
 }
 
 .item:hover .icon {
-    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.9)); /* Glow effect on hover */
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.9));
+    /* Glow effect on hover */
 }
 
 /* ---------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -111,8 +118,18 @@ body {
 centers it */
 .main-container {
     z-index: 2;
-    max-width: 1600px;
+    max-width: 1280px;
     margin: 5rem auto;
+}
+
+#mobile-sitemap {
+    display: none;
+}
+
+@media screen and (max-width: 1313px) {
+    .main-container {
+        margin: 5rem 1rem;
+    }
 }
 
 /* sets up the two columns next to eachother as two tall rows,
@@ -129,25 +146,80 @@ adds a gap between them */
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    flex: 4;
 }
 
 /* left column is smaller */
-#left-column {
+#left-column {}
+
+/* middle column is larger */
+#middle-column {
+    /* flex: 4; */
+    /* align-self: flex-start; */
+    /* } */
+
+    /* right column is smaller */
+}
+
+#right-column {
+    flex: 1;
+    align-self: flex-start;
     align-self: flex-start;
     position: sticky;
     top: 50px;
 }
 
-/* middle column is larger */
-#middle-column {
-    flex: 3;
-    align-self: flex-start;
+.links li {
+    list-style-type: none;
+    display: inline-flex;
+    align-items: center;
 }
 
-/* right column is smaller */
-#right-column {
-    flex: 1;
-    align-self: flex-start;
+.links a {
+    color: white;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.0));
+    /* text-decoration: none; */
+}
+
+.links a:hover {
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 1.0));
+}
+
+/* #toc-list { */
+/* display: flex; */
+/* flex-direction: column; */
+/* gap: 0.75rem; */
+/* } */
+
+/* .links { */
+/* display: flex; */
+/* flex-direction: column; */
+/* justify-content: center; */
+/* } */
+
+.links-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+/* style for the list of contact methods on mobile */
+#mobile-contact-list {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    justify-content: space-around;
+}
+
+/* center text with icons */
+#mobile-contact-list li {
+    display: inline-flex;
+    align-items: center;
+}
+
+/* add padding to left side of the icons that arent first */
+#mobile-contact-list li:not(:first-child) {
+    padding-left: 8px;
 }
 
 /* * hide right column on mobile */
@@ -155,64 +227,31 @@ adds a gap between them */
     #right-column {
         display: none;
     }
-}
 
-/* ---------------------------------------------------------------------------------------------------------------------------------------------------- */
-/* ! table of contents */
-
-#toc li {
-    list-style-type: none;
-}
-
-#toc a {
-    color: white;
-    text-decoration: none;
-}
-
-#toc a:hover {
-    text-decoration: underline;
-}
-
-#toc-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-}
-
-.links {
-    display: flex;
-    /* flex-direction: column; */
-    justify-content: center;
-}
-
-/* ---------------------------------------------------------------------------------------------------------------------------------------------------- */
-/* ! job section */
-
-.job-item {
-    margin-bottom: 1rem;
+    #mobile-sitemap {
+        display: block;
+    }
 }
 
 /* ---------------------------------------------------------------------------------------------------------------------------------------------------- */
 /* ! contact list */
 
-#contact-list {
-    display: flex;
-    flex-direction: column;
+/* #contact-list { */
 
-    gap: 0.75rem;
-}
 
-#contact-list ol {
-    display: flex;
-}
+/* } */
 
-#contact-list li {
-    /* padding-left: 1rem; */
-    /* text-align: center; */
-    list-style-type: none;
-    display: inline-flex;
-    align-items: center;
-}
+/* #contact-list ol { */
+/* display: flex; */
+/* } */
+
+/* #contact-list li { */
+/* padding-left: 1rem; */
+/* text-align: center; */
+/* list-style-type: none; */
+/* display: inline-flex; */
+/* align-items: center; */
+/* } */
 
 .social-icons {
     width: 20px;
@@ -248,4 +287,18 @@ adds padding inside the dropdown choices */
     cursor: pointer;
     font-size: 1rem;
     /* padding: 0.25rem; */
+}
+
+
+.skills-icons {
+    width: 2rem;
+    height: 2rem;
+    padding-right: 0.5rem;
+    /* margin: 10px 0; */
+}
+
+.skills-row {
+    display: inline-flex;
+    align-items: center;
+    font-size: 1.2rem;
 }
