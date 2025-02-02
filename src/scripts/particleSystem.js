@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import SparkleTexture from '../assets/sparkle.png'
 
 const _VS = `
 uniform float pointMultiplier;
@@ -67,7 +68,7 @@ function getParticleSystem(params) {
   const { camera, emitter, parent, rate, texture, velocity } = params;
   const uniforms = {
     diffuseTexture: {
-      value: new THREE.TextureLoader().load('/src/images/sparkle.png')
+      value: new THREE.TextureLoader().load(SparkleTexture)
     },
     pointMultiplier: {
       value: window.innerHeight / (2.0 * Math.tan(30.0 * Math.PI / 180.0))
